@@ -174,5 +174,19 @@ namespace Garage_2.Controllers
         {
             return _context.ParkedVehicle.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> Filter(string regNrSearch)
+        {
+            var model = string.IsNullOrWhiteSpace(regNrSearch) ?
+                _context.ParkedVehicle :
+                _context.ParkedVehicle.Where(m => m.RegNr.ToLower().Contains(regNrSearch.ToLower()));
+
+            //model = genre == null ?
+            //    model :
+            //    model.Where(m => m.Genre == (Genre)genre);
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
+
     }
 }

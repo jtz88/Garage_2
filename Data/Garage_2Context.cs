@@ -13,10 +13,7 @@ namespace Garage_2.Data
             : base(options)
         {
         }
-
         public DbSet<ParkedVehicle> ParkedVehicle { get; set; }
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,12 +25,10 @@ namespace Garage_2.Data
                 .HasIndex(b => b.RegNr)
                 .IsUnique();
 
-
             modelBuilder.Entity<ParkedVehicle>()
                 .HasData(
                   new ParkedVehicle { Id = 1, RegNr="ABC123", VehicleType=VehicleType.Car, NrOfWheels=4 }
                  );
-
         }
     }
 }
