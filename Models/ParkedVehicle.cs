@@ -27,7 +27,7 @@ namespace Garage_2.Models
         [Required]
         public VehicleType vehicleType;
 
-        public int NoWheels { get; set; }
+        public int NrOfWheels { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
