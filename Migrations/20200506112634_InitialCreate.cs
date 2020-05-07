@@ -14,7 +14,7 @@ namespace Garage_2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegNr = table.Column<string>(nullable: false),
-                    NoWheels = table.Column<int>(nullable: false),
+                    NrOfWheels = table.Column<int>(nullable: false),
                     Color = table.Column<string>(nullable: true),
                     Brand = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
