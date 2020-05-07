@@ -18,9 +18,9 @@
                 <span asp-validation-for="RegNr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NoWheels" class="control-label"></label>
-                <input asp-for="NoWheels" class="form-control" />
-                <span asp-validation-for="NoWheels" class="text-danger"></span>
+                <label asp-for="NrOfWheels" class="control-label"></label>
+                <input asp-for="NrOfWheels" class="form-control" />
+                <span asp-validation-for="NrOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
@@ -37,11 +37,11 @@
                 <input asp-for="Model" class="form-control" />
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TimeOfArrival" class="control-label"></label>
-                <input asp-for="TimeOfArrival" class="form-control" />
-                <span asp-validation-for="TimeOfArrival" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+                    <label asp-for="TimeOfArrival" class="control-label"></label>
+                    <input asp-for="TimeOfArrival" class="form-control" />
+                    <span asp-validation-for="TimeOfArrival" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -52,7 +52,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

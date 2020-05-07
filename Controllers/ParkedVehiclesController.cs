@@ -54,13 +54,37 @@ namespace Garage_2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RegNr,NoWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,RegNr,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
         {
+            ViewBag.errMsg = "";
             if (ModelState.IsValid)
             {
-                _context.Add(parkedVehicle);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(parkedVehicle);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+
+                    //var dbUpdateEx = e as DbUpdateException;
+                    //var sqlEx = dbUpdateEx?.InnerException as SqlException;
+                    //if (sqlEx != null)
+                    //{
+                    //    //This is a DbUpdateException on a SQL database
+ 
+                    //   if (sqlEx.Number == SqlServerViolationOfUniqueIndex ||
+                    //       sqlEx.Number == SqlServerViolationOfUniqueConstraint)
+                    //   {
+                        ModelState.AddModelError("RegNr", "Reg.nr is not unique");
+                    //   }
+                    // else 
+                    //   {
+                    //    return BadRequest();
+                    //   }
+                    //}
+                }
             }
             return View(parkedVehicle);
         }
@@ -86,7 +110,7 @@ namespace Garage_2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNr,NoWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNr,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
         {
             if (id != parkedVehicle.Id)
             {
