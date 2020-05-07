@@ -4,14 +4,16 @@ using Garage_2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Garage_2.Migrations
 {
     [DbContext(typeof(Garage_2Context))]
-    partial class Garage_2ContextModelSnapshot : ModelSnapshot
+    [Migration("20200507115702_AnotherCreate")]
+    partial class AnotherCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +50,6 @@ namespace Garage_2.Migrations
 
                     b.Property<DateTime>("TimeOfArrival")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("VehicleType")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

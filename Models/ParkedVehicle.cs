@@ -28,7 +28,7 @@ namespace Garage_2.Models
 
         [Required]      // [Required(ErrorMessage = "Your elegant error message goes here")]
         [Display(Name = "Type of vehicle")]
-        public VehicleType VehicleType;
+        public VehicleType VehicleType { get; set; }
 
         [Range(1, 16)]
         [Display(Name = "Number of wheels")]
