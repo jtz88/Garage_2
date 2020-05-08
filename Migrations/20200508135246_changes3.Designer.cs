@@ -4,14 +4,16 @@ using Garage_2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Garage_2.Migrations
 {
     [DbContext(typeof(Garage_2Context))]
-    partial class Garage_2ContextModelSnapshot : ModelSnapshot
+    [Migration("20200508135246_changes3")]
+    partial class changes3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace Garage_2.Migrations
                     b.Property<DateTime>("TimeOfArrival")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 5, 8, 16, 19, 19, 77, DateTimeKind.Local).AddTicks(8975));
+                        .HasDefaultValue(new DateTime(2020, 5, 8, 15, 52, 46, 570, DateTimeKind.Local).AddTicks(5124));
 
                     b.Property<int>("VehicleType")
                         .HasColumnType("int");
@@ -64,11 +66,11 @@ namespace Garage_2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 7,
-                            NrOfWheels = 12,
-                            RegNr = "EZXC789",
+                            Id = 1,
+                            NrOfWheels = 4,
+                            RegNr = "EFG456",
                             TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VehicleType = 2
+                            VehicleType = 3
                         });
                 });
 #pragma warning restore 612, 618
