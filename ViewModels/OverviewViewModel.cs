@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Garage_2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Garage_2.Models
+namespace Garage_2.ViewModels
 {
     public class OverviewViewModel
     {
-        public string RegNr { get; }
-        public VehicleType VehicleType { get; }
-        public DateTime TimeOfArrival { get; }
-        
+        public string RegNr { get; set; }
+        public VehicleType VehicleType { get; set; }
+        public DateTime TimeOfArrival { get; set; }
+
         private string timeInGarage;
         public string TimeInGarage
         {
@@ -20,6 +21,5 @@ namespace Garage_2.Models
                 return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
             }
         }
-
     }
 }
