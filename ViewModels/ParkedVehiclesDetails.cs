@@ -1,28 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Garage_2.Models
+namespace Garage_2.ViewModels
 {
-    public class ParkedVehicle
+    public class ParkedVehiclesDetails
     {
-        public int Id { get; set; }
-
         [Required]
         [StringLength(32)]
         [Display(Name = "Reg.nr")]
         public string RegNr { get; set; }
 
-        [Required]      // [Required(ErrorMessage = "Your elegant error message goes here")]
+        [Required]
         [Display(Name = "Type of vehicle")]
         public VehicleType VehicleType { get; set; }
 
         [Range(1, 16)]
         [Display(Name = "Number of wheels")]
         public int NrOfWheels { get; set; }
- 
+
         [StringLength(32)]
         public string Color { get; set; }
 
@@ -34,17 +29,9 @@ namespace Garage_2.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Time of arrival")]
-        public DateTime TimeOfArrival { get; }
+        public DateTime TimeOfArrival { get; set; }
 
+        public string TimeInGarage { get; set; }
 
-        private string timeInGarage;
-        public string TimeInGarage
-        {
-            get
-            {
-                var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
-                return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
-            }
-        }
     }
 }

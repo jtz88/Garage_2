@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage_2.Data;
 using Garage_2.Models;
+using Garage_2.ViewModels;
 using Microsoft.Data.SqlClient;
 
 namespace Garage_2.Controllers
@@ -33,16 +34,29 @@ namespace Garage_2.Controllers
             {
                 return NotFound();
             }
-
+            //ParkedVehicle
             var parkedVehicle = await _context.ParkedVehicle
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (parkedVehicle == null)
             {
                 return NotFound();
             }
+            
+            var model = new ParkedVehiclesDetails
+            {
+                RegNr= parkedVehicle.RegNr,
+                NrOfWheels = parkedVehicle.NrOfWheels,
+                Color = parkedVehicle.Color,
+                Brand = parkedVehicle.Brand,
+                Model = parkedVehicle.Model,
+                TimeOfArrival = parkedVehicle.TimeOfArrival,
+                TimeInGarage = parkedVehicle.TimeInGarage
+            }; 
 
-            return View(parkedVehicle);
+            return View(model);
         }
+
+
 
         // GET: ParkedVehicles/Create
         public IActionResult Create()
@@ -89,6 +103,8 @@ namespace Garage_2.Controllers
             }
             return View(parkedVehicle);
         }
+   
+
 
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
