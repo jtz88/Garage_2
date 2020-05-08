@@ -13,26 +13,22 @@ namespace Garage_2.Data
             : base(options)
         {
         }
-
         public DbSet<ParkedVehicle> ParkedVehicle { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ParkedVehicle>()
+                .Property(b => b.TimeOfArrival)
+                .HasDefaultValue(DateTime.Now);
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<ParkedVehicle>()
-        //        .Property(b => b.TimeOfArrival)
-        //        .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<ParkedVehicle>()
+                .HasIndex(b => b.RegNr)
+                .IsUnique();
 
-        //    modelBuilder.Entity<ParkedVehicle>()
-        //        .HasIndex(b => b.RegNr)
-        //        .IsUnique();
-
-
-        //    modelBuilder.Entity<ParkedVehicle>()
-        //        .HasData(
-        //          new ParkedVehicle { Id = 1, RegNr = "ABC123", VehicleType = VehicleType.Car, NrOfWheels = 4 }
-        //         );
-
-        //}
+            modelBuilder.Entity<ParkedVehicle>()
+                .HasData(
+                  new ParkedVehicle { Id = 1, RegNr="ABC123", VehicleType=VehicleType.Car, NrOfWheels=4 }
+                 );
+        }
     }
 }

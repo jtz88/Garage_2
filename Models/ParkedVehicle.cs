@@ -45,7 +45,19 @@ namespace Garage_2.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Time of arrival")]
-        public DateTime TimeOfArrival { get; set; }
+        public DateTime TimeOfArrival { get; }
+
+
+        private string timeInGarage;
+        public string TimeInGarage
+        {
+            get
+            {
+                var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
+                return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
+            }
+        }
+
 
     }
 }

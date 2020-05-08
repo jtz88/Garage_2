@@ -15,8 +15,8 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="RegNr" class="control-label"></label>
-                <input asp-for="RegNr" class="form-control" />
-                <span asp-validation-for="RegNr" class="text-danger"></span> 
+                <input readonly asp-for="RegNr" class="form-control" />
+                <span asp-validation-for="RegNr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NrOfWheels" class="control-label"></label>
@@ -40,8 +40,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="TimeOfArrival" class="control-label"></label>
-                <input asp-for="TimeOfArrival" class="form-control" />
+                <input readonly asp-for="TimeOfArrival" class="form-control" />
                 <span asp-validation-for="TimeOfArrival" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeInGarage" class="control-label"></label>
+                <input readonly disabled asp-for="TimeInGarage" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

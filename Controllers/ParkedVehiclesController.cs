@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage_2.Data;
 using Garage_2.Models;
+using Microsoft.Data.SqlClient;
 
 namespace Garage_2.Controllers
 {
@@ -54,7 +55,7 @@ namespace Garage_2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RegNr,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,RegNr,VehicleType,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
         {
             ViewBag.errMsg = "";
             if (ModelState.IsValid)
@@ -65,25 +66,25 @@ namespace Garage_2.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException ex)
                 {
-
-                    //var dbUpdateEx = e as DbUpdateException;
-                    //var sqlEx = dbUpdateEx?.InnerException as SqlException;
-                    //if (sqlEx != null)
-                    //{
-                    //    //This is a DbUpdateException on a SQL database
- 
-                    //   if (sqlEx.Number == SqlServerViolationOfUniqueIndex ||
-                    //       sqlEx.Number == SqlServerViolationOfUniqueConstraint)
-                    //   {
-                        ModelState.AddModelError("RegNr", "Reg.nr is not unique");
-                    //   }
-                    // else 
-                    //   {
-                    //    return BadRequest();
-                    //   }
-                    //}
+                    var dbUpdateEx = ex as DbUpdateException;
+                    var sqlEx = dbUpdateEx?.InnerException as SqlException;
+                    if (sqlEx != null)
+                    {
+                        //This is a DbUpdateException on a SQL database 
+                        const int SqlServerViolationOfUniqueIndex = 2601;
+                        const int SqlServerViolationOfUniqueConstraint = 2627;
+                        if (sqlEx.Number == SqlServerViolationOfUniqueIndex ||
+                         sqlEx.Number == SqlServerViolationOfUniqueConstraint)
+                        {
+                            ModelState.AddModelError("RegNr", "Reg.nr is not unique");
+                        }
+                    else 
+                        {
+                        return BadRequest();
+                        }
+                    }
                 }
             }
             return View(parkedVehicle);
@@ -110,7 +111,7 @@ namespace Garage_2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNr,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNr,VehicleType,NrOfWheels,Color,Brand,Model,TimeOfArrival")] ParkedVehicle parkedVehicle)
         {
             if (id != parkedVehicle.Id)
             {
@@ -173,5 +174,19 @@ namespace Garage_2.Controllers
         {
             return _context.ParkedVehicle.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> Filter(string regNrSearch)
+        {
+            var model = string.IsNullOrWhiteSpace(regNrSearch) ?
+                _context.ParkedVehicle :
+                _context.ParkedVehicle.Where(m => m.RegNr.ToLower().Contains(regNrSearch.ToLower()));
+
+            //model = genre == null ?
+            //    model :
+            //    model.Where(m => m.Genre == (Genre)genre);
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
+
     }
 }
