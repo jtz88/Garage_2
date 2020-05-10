@@ -22,12 +22,12 @@ namespace Garage_2.ViewModels
         [Display(Name = "Debt")]
         [Range(0, int.MaxValue)]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public string PriceTotal
+        public int PriceTotal
         {
             get
             {
                 var priceTotal = DateTime.Now.Subtract(TimeOfArrival);
-                return String.Format($"{priceTotal.Hours * 10}");
+                return priceTotal.Hours * 25;
             }
         }
 
