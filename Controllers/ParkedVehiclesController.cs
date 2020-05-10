@@ -42,8 +42,34 @@ namespace Garage_2.Controllers
             return View(model);
         }
 
-    // GET: ParkedVehicles/Details/5
-    public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var parkedVehicles = await _context.ParkedVehicle.FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (parkedVehicles == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ReceiptViewModel
+            {
+                Id = parkedVehicles.Id,
+                RegNr = parkedVehicles.RegNr,
+                TimeOfArrival = parkedVehicles.TimeOfArrival,
+                TimeOfDeparture = DateTime.Now,
+            };
+
+            return View(model);
+        }
+
+
+// GET: ParkedVehicles/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
