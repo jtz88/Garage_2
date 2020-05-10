@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>All parked vehicles</h1>
 
 <form asp-action="Filter">
     <div class="input-group mb-3">
@@ -20,17 +20,17 @@
     </div>
 </form>
 
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 @*<p>*@
     <form asp-action="Create">       
-        <input type="submit" value="Park Vehicle" class="btn btn-danger" />
+        <input type="submit" value="Park Vehicle" class="btn btn-danger float-md-left" />
     </form>
     @*<input asp-action="Create" type="submit" value="Park Vehicle" class="btn btn-primary" />*@
     @*<a asp-action="Create">Park a car</a>*@
 @*</p>*@
+    <form asp-action="Overview">
+        <input type="submit" value="Overview" class="btn btn-warning float-md-right"/>
+    </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -79,7 +79,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Unpark</a>
             </td>
         </tr>
 }
