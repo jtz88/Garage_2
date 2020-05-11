@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "AskReceipt";
+
+    /*
+     *   @ViewData["regnr"]<br />
+            @ViewData["vehicleType"]<br />
+            @ViewData["nrOfWheels"]<br />
+            @ViewData["color"]<br />
+            @ViewData["brand"]<br />
+            @ViewData["model"]<br />
+            @ViewData["timeOfArrival"]<br />
+     * */
+}
+
+<h1>Kvitto?</h1>
+<a href="/ParkedVehicles/Receipt?regnr=@ViewData["regnr"]&vehicleType=@ViewData["vehicleType"]&nrOfWheels=@ViewData["nrOfWheels"]&color=@ViewData["color"]&brand=@ViewData["brand"]&model=@ViewData["model"]&timeOfArrival=@ViewData["timeOfArrival"]">JA</a>  
+<a href="/">NEJ</a>
+
