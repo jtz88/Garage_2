@@ -17,10 +17,6 @@ namespace Garage_2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<ParkedVehicle>()
-            //    .Property(b => b.TimeOfArrival)
-            //    .HasDefaultValue(DateTime.Now);
-
             modelBuilder.Entity<ParkedVehicle>()
                 .Property(b => b.TimeOfArrival)
                 .HasDefaultValueSql("getdate()");
