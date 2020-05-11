@@ -199,7 +199,7 @@ namespace Garage_2.Controllers
             return View(parkedVehicle);
         }
 
-        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage)
+        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, DateTime timeInGarage)
         {
             //https://localhost:44347/ParkedVehicles/Receipt?regnr=aaa&vehicleType=2&nrOfWheels=3&color=red&brand=ccc&model=ddd&timeOfArrival=2000-01-01
             ViewData["regnr"] = regnr;
@@ -213,7 +213,7 @@ namespace Garage_2.Controllers
             return View();
         }
         
-        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival,string timeInGarage)
+        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, DateTime timeInGarage)
         {
             ViewData["regnr"] = regnr;
             ViewData["vehicleType"] = vehicleType;
@@ -258,6 +258,8 @@ namespace Garage_2.Controllers
             var b = parkedVehicle.Brand;
             var m = parkedVehicle.Model;            //whatever
             var t = parkedVehicle.TimeOfArrival;
+            //var tg = parkedVehicle.TimeInGarage;
+            var tg = DateTime.Now.Subtract(t);
             var routeValues = new RouteValueDictionary  {
                 { "regnr", r },
                 { "vehicleType", v },
@@ -266,7 +268,7 @@ namespace Garage_2.Controllers
                 { "brand",b},
                 { "model",m},
                 { "timeOfArrival",t},
-                { "timeInGarage", parkedVehicle.TimeInGarage }
+                { "timeInGarage", tg }
                                                         };
 
             _context.ParkedVehicle.Remove(parkedVehicle);

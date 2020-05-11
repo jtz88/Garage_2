@@ -36,8 +36,6 @@ namespace Garage_2.Models
         [Display(Name = "Time of arrival")]
         public DateTime TimeOfArrival { get; }
 
-
-        private string timeInGarage;
         public string TimeInGarage
         {
             get
