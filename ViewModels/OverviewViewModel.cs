@@ -21,13 +21,13 @@ namespace Garage_2.ViewModels
         [Display(Name = "Time parked")]
         public string TimeInGarage { get; set; }
 
-        //public string TimeInGarage
-        //{
-        //    get
-        //    {
-        //        var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
-        //        return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
-        //    }
-        //}
+        public string timeInGarage
+        {
+            get
+            {
+                var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
+                return String.Format($"{timeInGarage.Hours}:{timeInGarage.Minutes}:{timeInGarage.Seconds}");
+            }
+        }
     }
 }

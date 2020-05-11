@@ -17,9 +17,13 @@ namespace Garage_2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<ParkedVehicle>()
+            //    .Property(b => b.TimeOfArrival)
+            //    .HasDefaultValue(DateTime.Now);
+
             modelBuilder.Entity<ParkedVehicle>()
                 .Property(b => b.TimeOfArrival)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<ParkedVehicle>()
                 .HasIndex(b => b.RegNr)
@@ -27,7 +31,7 @@ namespace Garage_2.Data
 
             modelBuilder.Entity<ParkedVehicle>()
                 .HasData(
-                  new ParkedVehicle { Id = 1, RegNr="ABC123", vehicleType=VehicleType.Car, NrOfWheels=4 }
+                  new ParkedVehicle { Id = 1, RegNr = "ABC123", Color = "Blue", Brand = "Volkswagen", Model = "Sedan", vehicleType=VehicleType.Car, NrOfWheels=4 }
                  );
         }
     }
