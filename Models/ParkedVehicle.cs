@@ -19,7 +19,7 @@ namespace Garage_2.Models
         [Display(Name = "Type of vehicle")]
         public VehicleType VehicleType { get; set; }
 
-        [Range(1, 16)]
+        [Range(0, 16)]
         [Display(Name = "Number of wheels")]
         public int NrOfWheels { get; set; }
  
