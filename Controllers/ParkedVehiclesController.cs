@@ -43,7 +43,7 @@ namespace Garage_2.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Receipt(int? id)
+        /*public async Task<IActionResult> Receipt(int? id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace Garage_2.Controllers
             };
 
             return View(model);
-        }
+        }*/
 
 
 // GET: ParkedVehicles/Details/5
