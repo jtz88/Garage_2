@@ -4,19 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-//Add-M<tab> 
-
 namespace Garage_2.Models
 {
-    public enum VehicleType
-    {
-        Airplane,
-        Boat,
-        Bus,
-        Car,
-        Motorcycle,
-    }
-
     public class ParkedVehicle
     {
         public int Id { get; set; }
@@ -28,7 +17,7 @@ namespace Garage_2.Models
 
         [Required]      // [Required(ErrorMessage = "Your elegant error message goes here")]
         [Display(Name = "Type of vehicle")]
-        public VehicleType VehicleType { get; set; }
+        public VehicleType vehicleType { get; set; }
 
         [Range(1, 16)]
         [Display(Name = "Number of wheels")]
@@ -47,5 +36,15 @@ namespace Garage_2.Models
         [Display(Name = "Time of arrival")]
         public DateTime TimeOfArrival { get; }
 
+
+        private string timeInGarage;
+        public string TimeInGarage
+        {
+            get
+            {
+                var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
+                return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
+            }
+        }
     }
 }

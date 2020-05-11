@@ -13,6 +13,16 @@ using Microsoft.Extensions.Hosting;
 
 namespace Garage_2
 {
+
+    public enum VehicleType
+    {
+        Airplane,
+        Boat,
+        Bus,
+        Car,
+        Motorcycle,
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

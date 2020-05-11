@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage_2.Data;
 using Garage_2.Models;
+using Garage_2.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Routing;
 
@@ -27,23 +28,77 @@ namespace Garage_2.Controllers
             return View(await _context.ParkedVehicle.ToListAsync());
         }
 
-        // GET: ParkedVehicles/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Overview()
+        {
+            var vehicles = await _context.ParkedVehicle.ToListAsync();
+
+            var model = vehicles.Select(m => new OverviewViewModel
+            {
+                RegNr = m.RegNr,
+                VehicleType = m.vehicleType,
+                TimeOfArrival = m.TimeOfArrival,
+                TimeInGarage = m.TimeInGarage
+            });
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Receipt(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
+            var parkedVehicles = await _context.ParkedVehicle.FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (parkedVehicles == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ReceiptViewModel
+            {
+                Id = parkedVehicles.Id,
+                RegNr = parkedVehicles.RegNr,
+                TimeOfArrival = parkedVehicles.TimeOfArrival,
+                TimeOfDeparture = DateTime.Now,
+            };
+
+            return View(model);
+        }
+
+
+// GET: ParkedVehicles/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            //ParkedVehicle
             var parkedVehicle = await _context.ParkedVehicle
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (parkedVehicle == null)
             {
                 return NotFound();
             }
+            
+            var model = new ParkedVehiclesDetails
+            {
+                RegNr= parkedVehicle.RegNr,
+                NrOfWheels = parkedVehicle.NrOfWheels,
+                Color = parkedVehicle.Color,
+                Brand = parkedVehicle.Brand,
+                Model = parkedVehicle.Model,
+                TimeOfArrival = parkedVehicle.TimeOfArrival,
+                TimeInGarage = parkedVehicle.TimeInGarage
+            }; 
 
-            return View(parkedVehicle);
+            return View(model);
         }
+
+
 
         // GET: ParkedVehicles/Create
         public IActionResult Create()
@@ -90,6 +145,8 @@ namespace Garage_2.Controllers
             }
             return View(parkedVehicle);
         }
+   
+
 
         // GET: ParkedVehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -218,5 +275,19 @@ namespace Garage_2.Controllers
         {
             return _context.ParkedVehicle.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> Filter(string regNrSearch)
+        {
+            var model = string.IsNullOrWhiteSpace(regNrSearch) ?
+                _context.ParkedVehicle :
+                _context.ParkedVehicle.Where(m => m.RegNr.ToLower().Contains(regNrSearch.ToLower()));
+
+            //model = genre == null ?
+            //    model :
+            //    model.Where(m => m.Genre == (Genre)genre);
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
+
     }
 }
