@@ -37,6 +37,64 @@ namespace Garage_2
     
     public var parkingSpaces= new ParkingSpace[Garage_ParkingCap];
 
+
+
+
+    public int GetNextAvailableSpace(VehicleType? vehicleType,int? posParkingSpace ) {
+        if (posParkingSpace == null) posParkingSpace=0;
+         var parkingSizeVehicle= vehicleParkingSize(VehicleType) ?? 1;
+
+        for (int i = posParkingSpace; i <= parkingSpaces.lenght-parkingSizeVehicle ; i++)
+			{
+            var freeSpace=true;
+            for (int s = 0; s < parkingSizeVehicle; s++) {
+                if (parkingSpaces[i+s] != null) freeSpace=false;
+			}
+            if (freeSpace) return i;
+		}
+    }
+
+    public int  GetNrOfAvailableSpace(VehicleType? vehicleType) {
+        int? posParkingSpace=0;
+        var nrOfParkingSpace=0;
+        while (posParkingSpace != null) {
+            posParkingSpace=GetNextAvailableSpace(vehicleType,posParkingSpace);
+            if (posParkingSpace != null) nrOfParkingSpace++;
+        }
+        return nrOfParkingSpace;
+    }
+
+ 
+
+    public void Park(ParkedVehicleId? id,int? posParkingSpace, bool? unPark){
+        var parkedVehicle = GetParkedVehicle(ParkedVehicleId);
+        var parkingSizeVehicle= vehicleParkingSize(parkedVehicle.VehicleType) ?? 1;
+
+        for (int s = 0; s < parkingSizeVehicle; s++) {
+            parkingSpaces[posParkingSpace+s]=(unPark)? null: ParkedVehicleId;
+        }
+    }
+
+    public void UnPark(ParkedVehicleId id){
+        int? posParkingSpace=null;
+        for (int i = 0; i <= parkingSpaces.lenght-parkingSizeVehicle ; i++) {
+            if (parkingSpaces[i] == ParkedVehicleId){
+                posParkingSpace=i;
+                continue;
+            }
+        }
+        if (posParkingSpace) Park(ParkedVehicleId,posParkingSpace,true);
+    }
+
+    public ParkedVehicle GetParkedVehicle(ParkedVehicleId id){
+            var parkedVehicle = await _context.ParkedVehicle
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (parkedVehicle != null) return parkedVehicle;
+    }
+
+
+
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
