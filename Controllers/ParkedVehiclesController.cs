@@ -199,7 +199,7 @@ namespace Garage_2.Controllers
             return View(parkedVehicle);
         }
 
-        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage)
         {
             //https://localhost:44347/ParkedVehicles/Receipt?regnr=aaa&vehicleType=2&nrOfWheels=3&color=red&brand=ccc&model=ddd&timeOfArrival=2000-01-01
             ViewData["regnr"] = regnr;
@@ -209,10 +209,11 @@ namespace Garage_2.Controllers
             ViewData["brand"] = brand;
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
+            ViewData["timeInGarage"] = timeInGarage;
             return View();
         }
         
-        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival,string timeInGarage)
         {
             ViewData["regnr"] = regnr;
             ViewData["vehicleType"] = vehicleType;
@@ -221,6 +222,7 @@ namespace Garage_2.Controllers
             ViewData["brand"] = brand;
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
+            ViewData["timeInGarage"] = timeInGarage;
             return View();
         }
 
