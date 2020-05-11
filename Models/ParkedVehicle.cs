@@ -34,7 +34,7 @@ namespace Garage_2.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Time of arrival")]
-        public DateTime TimeOfArrival { get; }
+        public DateTime TimeOfArrival { get; set; }
 
         public int PosParkingSpace { get; set; }
 
