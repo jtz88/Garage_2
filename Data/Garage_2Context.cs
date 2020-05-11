@@ -27,7 +27,7 @@ namespace Garage_2.Data
 
             modelBuilder.Entity<ParkedVehicle>()
                 .HasData(
-                  new ParkedVehicle { Id = 1, RegNr="ABC123", VehicleType=VehicleType.Car, NrOfWheels=4 }
+                  new ParkedVehicle { Id = 1, RegNr="ABC123", vehicleType=VehicleType.Car, NrOfWheels=4 }
                  );
         }
     }

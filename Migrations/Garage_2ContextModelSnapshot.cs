@@ -49,9 +49,9 @@ namespace Garage_2.Migrations
                     b.Property<DateTime>("TimeOfArrival")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 5, 11, 15, 30, 34, 47, DateTimeKind.Local).AddTicks(6629));
+                        .HasDefaultValue(new DateTime(2020, 5, 11, 9, 31, 12, 712, DateTimeKind.Local).AddTicks(8633));
 
-                    b.Property<int>("VehicleType")
+                    b.Property<int>("vehicleType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -68,7 +68,7 @@ namespace Garage_2.Migrations
                             NrOfWheels = 4,
                             RegNr = "ABC123",
                             TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            VehicleType = 3
+                            vehicleType = 3
                         });
                 });
 #pragma warning restore 612, 618

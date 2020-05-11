@@ -9,6 +9,7 @@ using Garage_2.Data;
 using Garage_2.Models;
 using Garage_2.ViewModels;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Routing;
 
 namespace Garage_2.Controllers
 {
@@ -34,7 +35,7 @@ namespace Garage_2.Controllers
             var model = vehicles.Select(m => new OverviewViewModel
             {
                 RegNr = m.RegNr,
-                VehicleType = m.VehicleType,
+                VehicleType = m.vehicleType,
                 TimeOfArrival = m.TimeOfArrival,
                 TimeInGarage = m.TimeInGarage
             });
@@ -42,7 +43,7 @@ namespace Garage_2.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Receipt(int? id)
+        /*public async Task<IActionResult> Receipt(int? id)
         {
             if (id == null)
             {
@@ -65,7 +66,7 @@ namespace Garage_2.Controllers
             };
 
             return View(model);
-        }
+        }*/
 
 
 // GET: ParkedVehicles/Details/5
@@ -198,6 +199,31 @@ namespace Garage_2.Controllers
             return View(parkedVehicle);
         }
 
+        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+        {
+            //https://localhost:44347/ParkedVehicles/Receipt?regnr=aaa&vehicleType=2&nrOfWheels=3&color=red&brand=ccc&model=ddd&timeOfArrival=2000-01-01
+            ViewData["regnr"] = regnr;
+            ViewData["vehicleType"] = vehicleType;
+            ViewData["nrOfWheels"] = nrOfWheels;
+            ViewData["color"] = color;
+            ViewData["brand"] = brand;
+            ViewData["model"] = model;
+            ViewData["timeOfArrival"] = timeOfArrival;
+            return View();
+        }
+        
+        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+        {
+            ViewData["regnr"] = regnr;
+            ViewData["vehicleType"] = vehicleType;
+            ViewData["nrOfWheels"] = nrOfWheels;
+            ViewData["color"] = color;
+            ViewData["brand"] = brand;
+            ViewData["model"] = model;
+            ViewData["timeOfArrival"] = timeOfArrival;
+            return View();
+        }
+
         // GET: ParkedVehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -222,9 +248,27 @@ namespace Garage_2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
+                    
+            var r = parkedVehicle.RegNr;
+            var v = parkedVehicle.vehicleType;
+            var n = parkedVehicle.NrOfWheels;
+            var c = parkedVehicle.Color;
+            var b = parkedVehicle.Brand;
+            var m = parkedVehicle.Model;            //whatever
+            var t = parkedVehicle.TimeOfArrival;
+            var routeValues = new RouteValueDictionary  {
+                { "regnr", r },
+                { "vehicleType", v },
+                { "nrOfWheels",n},
+                { "color",c},
+                { "brand",b},
+                { "model",m},
+                { "timeOfArrival",t}
+                                                        };
+
             _context.ParkedVehicle.Remove(parkedVehicle);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AskReceipt),routeValues);
         }
 
         private bool ParkedVehicleExists(int id)

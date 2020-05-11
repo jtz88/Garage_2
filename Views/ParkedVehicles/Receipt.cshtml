@@ -1,61 +1,37 @@
-﻿@model Garage_2.ViewModels.ReceiptViewModel
-
+﻿
 @{
     ViewData["Title"] = "Receipt";
 }
 
-<h1>Checkout</h1>
+<h1>Receipt</h1>
+<hr />
+<table>
+    <tr>
+        <td>Reg number:</td><td>@ViewData["regnr"]</td>
+    </tr>
+    <tr>
+        <td>Vehicle Type:</td><td>@ViewData["vehicleType"]</td>
 
-<h3>Would you like a receipt?</h3>
+    </tr>
+    <tr>
+        <td>Nr of wheels:</td><td>@ViewData["nrOfWheels"]</td>
 
-<a href="javascript:window.print()" id="btn1" class="btn btn-success">Print</a>
+    </tr>
+    <tr>
+        <td>Color:</td><td>@ViewData["color"]</td>
 
-<div>
-    <hr />
-    <dl class="row">
-        @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>*@
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegNr)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegNr)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TimeOfArrival)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TimeOfArrival)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TimeOfDeparture)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TimeOfDeparture)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PriceTotal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PriceTotal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalParkingTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TotalParkingTime)
-        </dd>
-    </dl>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Leave" class="btn btn-danger float-md-left" />
-    </form>
+    </tr>
+    <tr>
+        <td>Brand:</td><td>@ViewData["brand"]</td>
 
-    <form asp-action="Index">
-        <input type="submit" value="Back" class="btn btn-primary float-md-right" />
-    </form>
-</div>
+    </tr>
+    <tr>
+        <td>Model:</td><td>@ViewData["model"]</td>
+    </tr>
+    <tr>
+        <td>Time of arrival:</td><td>@ViewData["timeOfArrival"] (add parked time)</td>
+    </tr>
+</table>
+<hr />
+<a href="/">back to list</a>
+
