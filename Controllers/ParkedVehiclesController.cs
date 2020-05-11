@@ -34,7 +34,7 @@ namespace Garage_2.Controllers
             var model = vehicles.Select(m => new OverviewViewModel
             {
                 RegNr = m.RegNr,
-                VehicleType = m.VehicleType,
+                VehicleType = m.vehicleType,
                 TimeOfArrival = m.TimeOfArrival,
                 TimeInGarage = m.TimeInGarage
             });
