@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Garage_2.Migrations
 {
-    public partial class _0511_01 : Migration
+    public partial class _99 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,12 +14,13 @@ namespace Garage_2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegNr = table.Column<string>(maxLength: 32, nullable: false),
-                    vehicleType = table.Column<int>(nullable: false),
+                    VehicleType = table.Column<int>(nullable: false),
                     NrOfWheels = table.Column<int>(nullable: false),
                     Color = table.Column<string>(maxLength: 32, nullable: true),
                     Brand = table.Column<string>(maxLength: 32, nullable: true),
                     Model = table.Column<string>(maxLength: 64, nullable: true),
-                    TimeOfArrival = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 5, 11, 9, 31, 12, 712, DateTimeKind.Local).AddTicks(8633))
+                    TimeOfArrival = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
+                    PosParkingSpace = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,8 +29,15 @@ namespace Garage_2.Migrations
 
             migrationBuilder.InsertData(
                 table: "ParkedVehicle",
-                columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "RegNr", "vehicleType" },
-                values: new object[] { 1, null, null, null, 4, "ABC123", 3 });
+                columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "PosParkingSpace", "RegNr", "VehicleType" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, 4, 0, "US_LM126", 0 },
+                    { 2, null, "White", null, 0, 0, "BVG17", 1 },
+                    { 3, null, null, null, 6, 0, "BUS123", 2 },
+                    { 4, null, null, null, 4, 0, "ABC123", 3 },
+                    { 5, null, "Black", "Yamaha YZF1000R 4VD", 2, 0, "ADZ967", 4 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParkedVehicle_RegNr",

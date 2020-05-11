@@ -9,6 +9,6 @@ namespace Garage_2.Models
     {
         public int Id { get; set; }
         public int? ParkedVehicleId { get; set; }
+        public float Used { get; set; }
     }
-
 }

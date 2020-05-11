@@ -41,6 +41,9 @@ namespace Garage_2.Migrations
                     b.Property<int>("NrOfWheels")
                         .HasColumnType("int");
 
+                    b.Property<int>("PosParkingSpace")
+                        .HasColumnType("int");
+
                     b.Property<string>("RegNr")
                         .IsRequired()
                         .HasColumnType("nvarchar(32)")
@@ -49,9 +52,9 @@ namespace Garage_2.Migrations
                     b.Property<DateTime>("TimeOfArrival")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 5, 11, 9, 31, 12, 712, DateTimeKind.Local).AddTicks(8633));
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<int>("vehicleType")
+                    b.Property<int>("VehicleType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -66,9 +69,49 @@ namespace Garage_2.Migrations
                         {
                             Id = 1,
                             NrOfWheels = 4,
+                            PosParkingSpace = 0,
+                            RegNr = "US_LM126",
+                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Color = "White",
+                            NrOfWheels = 0,
+                            PosParkingSpace = 0,
+                            RegNr = "BVG17",
+                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NrOfWheels = 6,
+                            PosParkingSpace = 0,
+                            RegNr = "BUS123",
+                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VehicleType = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NrOfWheels = 4,
+                            PosParkingSpace = 0,
                             RegNr = "ABC123",
                             TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            vehicleType = 3
+                            VehicleType = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Color = "Black",
+                            Model = "Yamaha YZF1000R 4VD",
+                            NrOfWheels = 2,
+                            PosParkingSpace = 0,
+                            RegNr = "ADZ967",
+                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VehicleType = 4
                         });
                 });
 #pragma warning restore 612, 618

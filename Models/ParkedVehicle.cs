@@ -17,7 +17,7 @@ namespace Garage_2.Models
 
         [Required]      // [Required(ErrorMessage = "Your elegant error message goes here")]
         [Display(Name = "Type of vehicle")]
-        public VehicleType vehicleType { get; set; }
+        public VehicleType VehicleType { get; set; }
 
         [Range(1, 16)]
         [Display(Name = "Number of wheels")]
@@ -36,14 +36,14 @@ namespace Garage_2.Models
         [Display(Name = "Time of arrival")]
         public DateTime TimeOfArrival { get; }
 
+        public int PosParkingSpace { get; set; }
 
-        private string timeInGarage;
         public string TimeInGarage
         {
             get
             {
                 var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
-                return String.Format($"{timeInGarage.Hours}:{ timeInGarage.Minutes}:{timeInGarage.Seconds}");
+                return String.Format($"{timeInGarage.Hours:00}:{ timeInGarage.Minutes:00}:{timeInGarage.Seconds:00}");
             }
         }
     }

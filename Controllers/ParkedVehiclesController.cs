@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Garage_2;
 using Garage_2.Data;
 using Garage_2.Models;
 using Garage_2.ViewModels;
@@ -25,7 +26,8 @@ namespace Garage_2.Controllers
         // GET: ParkedVehicles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ParkedVehicle.ToListAsync());
+            var vehicles = await _context.ParkedVehicle.ToListAsync();
+            return View(nameof(Index), vehicles);
         }
 
         public async Task<IActionResult> Overview()
@@ -35,7 +37,7 @@ namespace Garage_2.Controllers
             var model = vehicles.Select(m => new OverviewViewModel
             {
                 RegNr = m.RegNr,
-                VehicleType = m.vehicleType,
+                VehicleType = m.VehicleType,
                 TimeOfArrival = m.TimeOfArrival,
                 TimeInGarage = m.TimeInGarage
             });
@@ -250,7 +252,7 @@ namespace Garage_2.Controllers
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
                     
             var r = parkedVehicle.RegNr;
-            var v = parkedVehicle.vehicleType;
+            var v = parkedVehicle.VehicleType;
             var n = parkedVehicle.NrOfWheels;
             var c = parkedVehicle.Color;
             var b = parkedVehicle.Brand;
@@ -288,6 +290,99 @@ namespace Garage_2.Controllers
 
             return View(nameof(Index), await model.ToListAsync());
         }
+
+
+
+        public async Task<ParkedVehicle> GetParkedVehicle(int id)
+        {
+            var parkedVehicle = await _context.ParkedVehicle
+                .FirstOrDefaultAsync(m => m.Id == id);
+            return parkedVehicle;
+        }
+
+
+
+        public Dictionary<VehicleType, float> vehicleParkingSize = new Dictionary<VehicleType, float>() {
+                                  {VehicleType.Airplane, 3},
+                                  {VehicleType.Boat, 3},
+                                  {VehicleType.Bus, 2},
+                                  {VehicleType.Car, 1},
+                                  {VehicleType.Motorcycle, 1/3}
+    };
+
+        public const int Garage_ParkingCap = 50;
+
+        public ParkingSpace[] parkingSpaces = new ParkingSpace[Garage_ParkingCap];
+
+
+        public int? GetNextAvailableSpace(VehicleType vehicleType, int posParkingSpace = 0)
+        {
+            var parkingSizeVehicle = vehicleParkingSize[vehicleType]; // ?? 1.0;
+            for (int i = posParkingSpace; i <= (int)(parkingSpaces.Length - parkingSizeVehicle); i++)
+            {
+                var freeSpace = true;
+                for (int s = 0; s < parkingSizeVehicle; s++)
+                {
+                    if (parkingSpaces[i + s] != null)
+                    {
+                        if (parkingSpaces[i + s].Used + parkingSizeVehicle <= 1.0) continue; //(vehicleType===VehicleType.Motorcycle)
+                        freeSpace = false;
+                    }
+                }
+                if (freeSpace) return i;
+            }
+            return null;
+        }
+
+        public int GetNrOfAvailableSpace(VehicleType vehicleType)
+        {
+            int? posParkingSpace = 0;
+            var nrOfParkingSpace = 0;
+            var parkingSizeVehicle = vehicleParkingSize[vehicleType]; // ?? 1.0;
+            while (posParkingSpace != null)
+            {
+                posParkingSpace = GetNextAvailableSpace(vehicleType, (int)posParkingSpace);
+                if (posParkingSpace != null)
+                {
+                    if (parkingSizeVehicle < 1.0
+                        && parkingSpaces[(int)posParkingSpace].Used < 1.0
+                        && (1.0 - parkingSpaces[(int)posParkingSpace].Used) >= parkingSizeVehicle)
+                    {
+                        nrOfParkingSpace += (int)((1.0 - parkingSpaces[(int)posParkingSpace].Used) / parkingSizeVehicle);
+                    }
+                    else
+                        nrOfParkingSpace++;
+                }
+            }
+            return nrOfParkingSpace;
+        }
+
+
+        public void Park(int id, int posParkingSpace = 0, bool unPark = false)
+        {
+            var parkedVehicle = GetParkedVehicle(id).Result;
+            var parkingSizeVehicle = vehicleParkingSize[parkedVehicle.VehicleType]; // ?? 1.0;
+
+            for (int s = 0; s < parkingSizeVehicle; s++)
+            {
+                parkingSpaces[posParkingSpace + s].ParkedVehicleId = unPark ? null : (int?)((ParkedVehicle)parkedVehicle).Id;
+            }
+        }
+
+        public void UnPark(int id)
+        {
+            int? posParkingSpace = null;
+            for (int i = 0; i <= parkingSpaces.Length; i++)
+            {
+                if (parkingSpaces[i].ParkedVehicleId == id)
+                {
+                    posParkingSpace = i;
+                    continue;
+                }
+            }
+            if (posParkingSpace != null) Park(id, (int)posParkingSpace, true);
+        }
+
 
     }
 }
