@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +23,19 @@ namespace Garage_2
         Car,
         Motorcycle,
     }
+
+    public const var vehicleParkingSize=   
+              new Dictionary<VehicleType, float>(){ 
+                                  {VehicleType.Airplane, 3}, 
+                                  {VehicleType.Boat, 3}, 
+                                  {VehicleType.Bus, 2},
+                                  {VehicleType.Car, 1},
+                                  {VehicleType.Motorcycle, (1/3)},
+              };  
+
+    public const int Garage_ParkingCap = 50;
+    
+    public var parkingSpaces= new ParkingSpace[Garage_ParkingCap];
 
     public class Startup
     {
