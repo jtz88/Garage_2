@@ -250,7 +250,7 @@ namespace Garage_2.Controllers
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
                     
             var r = parkedVehicle.RegNr;
-            var v = parkedVehicle.VehicleType;
+            var v = parkedVehicle.vehicleType;
             var n = parkedVehicle.NrOfWheels;
             var c = parkedVehicle.Color;
             var b = parkedVehicle.Brand;
