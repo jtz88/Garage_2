@@ -19,7 +19,8 @@ namespace Garage_2.Data
         {
             modelBuilder.Entity<ParkedVehicle>()
                 .Property(b => b.TimeOfArrival)
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValueSql("getdate()");
+                //.HasDefaultValue(DateTime.Now);
 
             modelBuilder.Entity<ParkedVehicle>()
                 .HasIndex(b => b.RegNr)
