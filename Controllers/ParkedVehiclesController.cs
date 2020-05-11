@@ -263,7 +263,8 @@ namespace Garage_2.Controllers
                 { "color",c},
                 { "brand",b},
                 { "model",m},
-                { "timeOfArrival",t}
+                { "timeOfArrival",t},
+                { "timeInGarage", parkedVehicle.TimeInGarage }
                                                         };
 
             _context.ParkedVehicle.Remove(parkedVehicle);
