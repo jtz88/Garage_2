@@ -5,13 +5,33 @@
 
 <h1>Receipt</h1>
 <hr />
-            @ViewData["regnr"]<br />
-            @ViewData["vehicleType"]<br />
-            @ViewData["nrOfWheels"]<br />
-            @ViewData["color"]<br />
-            @ViewData["brand"]<br />
-            @ViewData["model"]<br />
-            @ViewData["timeOfArrival"]<br />
+<table>
+    <tr>
+        <td>Reg number:</td><td>@ViewData["regnr"]</td>
+    </tr>
+    <tr>
+        <td>Vehicle Type:</td><td>@ViewData["vehicleType"]</td>
+
+    </tr>
+    <tr>
+        <td>Nr of wheels:</td><td>@ViewData["nrOfWheels"]</td>
+
+    </tr>
+    <tr>
+        <td>Color:</td><td>@ViewData["color"]</td>
+
+    </tr>
+    <tr>
+        <td>Brand:</td><td>@ViewData["brand"]</td>
+
+    </tr>
+    <tr>
+        <td>Model:</td><td>@ViewData["model"]</td>
+    </tr>
+    <tr>
+        <td>Time of arrival</td><td>@ViewData["timeOfArrival"] (add parked time)</td>
+    </tr>
+</table>
 <hr />
 <a href="/">tillbaks</a>
 
