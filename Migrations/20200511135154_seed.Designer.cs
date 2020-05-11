@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Garage_2.Migrations
 {
     [DbContext(typeof(Garage_2Context))]
-    [Migration("20200511073113_0511_01")]
-    partial class _0511_01
+    [Migration("20200511135154_seed")]
+    partial class seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,7 +51,7 @@ namespace Garage_2.Migrations
                     b.Property<DateTime>("TimeOfArrival")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 5, 11, 9, 31, 12, 712, DateTimeKind.Local).AddTicks(8633));
+                        .HasDefaultValue(new DateTime(2020, 5, 11, 15, 51, 54, 445, DateTimeKind.Local).AddTicks(4328));
 
                     b.Property<int>("vehicleType")
                         .HasColumnType("int");
@@ -67,6 +67,9 @@ namespace Garage_2.Migrations
                         new
                         {
                             Id = 1,
+                            Brand = "Volkswagen",
+                            Color = "Blue",
+                            Model = "Sedan",
                             NrOfWheels = 4,
                             RegNr = "ABC123",
                             TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

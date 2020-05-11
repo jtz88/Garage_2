@@ -69,7 +69,7 @@ namespace Garage_2.Controllers
         }*/
 
 
-// GET: ParkedVehicles/Details/5
+        // GET: ParkedVehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
