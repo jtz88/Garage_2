@@ -28,7 +28,7 @@ namespace Garage_2.Data
             modelBuilder.Entity<ParkedVehicle>()
                 .HasData(
                   new ParkedVehicle { Id = 1, RegNr="US_LM126", VehicleType=VehicleType.Airplane, NrOfWheels=4 },
-                  new ParkedVehicle { Id = 2, RegNr="BVG17", VehicleType=VehicleType.Boat, NrOfWheels=0,Color="White" },
+                  new ParkedVehicle { Id = 2, RegNr="BVG17", VehicleType=VehicleType.Boat, NrOfWheels=0,Color="White", TimeOfArrival= DateTime.Now - new TimeSpan(1, 1, 30, 0) },
                   new ParkedVehicle { Id = 3, RegNr="BUS123", VehicleType=VehicleType.Bus, NrOfWheels=6 },
                   new ParkedVehicle { Id = 4, RegNr="ABC123", VehicleType=VehicleType.Car, NrOfWheels=4 },
                   new ParkedVehicle { Id = 5, RegNr="ADZ967", VehicleType=VehicleType.Motorcycle, NrOfWheels=2,Model= "Yamaha YZF1000R 4VD", Color="Black"}
