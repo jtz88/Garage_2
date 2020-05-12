@@ -2,47 +2,59 @@
 
 @{
     ViewData["Title"] = "Edit";
-}  <div><label asp-for="VehicleType" class="control-label"></label>
-<input readonly asp-for="VehicleType" class="form-control" />
-<span asp-validation-for="VehicleType" class="text-danger"></span>
+}
+
+<h1>Edit</h1>
+
+<h4>ParkedVehicle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="VehicleType" class="control-label"></label>
+                <input readonly asp-for="VehicleType" class="form-control" />
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
-<div class="form-group">
-    <label asp-for="RegNr" class="control-label"></label>
-    <input readonly asp-for="RegNr" class="form-control" />
-    <span asp-validation-for="RegNr" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="NrOfWheels" class="control-label"></label>
-    <input asp-for="NrOfWheels" class="form-control" />
-    <span asp-validation-for="NrOfWheels" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Color" class="control-label"></label>
-    <input asp-for="Color" class="form-control" />
-    <span asp-validation-for="Color" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Brand" class="control-label"></label>
-    <input asp-for="Brand" class="form-control" />
-    <span asp-validation-for="Brand" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Model" class="control-label"></label>
-    <input asp-for="Model" class="form-control" />
-    <span asp-validation-for="Model" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="TimeOfArrival" class="control-label"></label>
-    <input readonly asp-for="TimeOfArrival" class="form-control" />
-    @*    <span asp-validation-for="TimeOfArrival" class="text-danger"></span> *@
-</div>
-<div class="form-group">
-    <label asp-for="TimeInGarage" class="control-label"></label>
-    <input readonly disabled asp-for="TimeInGarage" class="form-control" />
-</div>
-<div class="form-group">
-    <input type="submit" value="Save" class="btn btn-primary" />
-</div>
+            <div class="form-group">
+                <label asp-for="RegNr" class="control-label"></label>
+                <input readonly asp-for="RegNr" class="form-control" />
+                <span asp-validation-for="RegNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NrOfWheels" class="control-label"></label>
+                <input asp-for="NrOfWheels" class="form-control" />
+                <span asp-validation-for="NrOfWheels" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeOfArrival" class="control-label"></label>
+                <input readonly asp-for="TimeOfArrival" class="form-control" />
+                @*    <span asp-validation-for="TimeOfArrival" class="text-danger"></span> *@
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeInGarage" class="control-label"></label>
+                <input readonly disabled asp-for="TimeInGarage" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Garage_2.Migrations
 {
-    public partial class _111 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace Garage_2.Migrations
             migrationBuilder.InsertData(
                 table: "ParkedVehicle",
                 columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "PosParkingSpace", "RegNr", "TimeOfArrival", "VehicleType" },
-                values: new object[] { 2, null, "White", null, 0, 0, "BVG17", new DateTime(2020, 5, 11, 8, 54, 38, 881, DateTimeKind.Local).AddTicks(5101), 1 });
+                values: new object[] { 2, null, "White", null, 0, 0, "BVG17", new DateTime(2020, 5, 11, 8, 58, 19, 195, DateTimeKind.Local).AddTicks(5705), 1 });
 
             migrationBuilder.InsertData(
                 table: "ParkedVehicle",
