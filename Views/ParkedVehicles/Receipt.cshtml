@@ -7,40 +7,43 @@
 <hr />
 <table>
     <tr>
-        <td>Reg number:</td>
+        <td><strong>Reg number:</strong></td>
         <td>@ViewData["regnr"]</td>
     </tr>
     <tr>
-        <td>Vehicle Type:</td>
+        <td><strong>Vehicle Type:</strong></td>
         <td>@ViewData["vehicleType"]</td>
     </tr>
     <tr>
-        <td>Nr of wheels:</td>
+        <td><strong>Nr of wheels:</strong></td>
         <td>@ViewData["nrOfWheels"]</td>
     </tr>
     <tr>
-        <td>Color:</td>
+        <td><strong>Color:</strong></td>
         <td>@ViewData["color"]</td>
     </tr>
     <tr>
-        <td>Brand:</td>
+        <td><strong>Brand:</strong></td>
         <td>@ViewData["brand"]</td>
     </tr>
     <tr>
-        <td>Model:</td>
+        <td><strong>Model:</strong></td>
         <td>@ViewData["model"]</td>
     </tr>
     <tr>
-        <td>Time of arrival:</td>
+        <td><strong>Time of arrival:</strong></td>
         <td>@ViewData["timeOfArrival"]</td>
     </tr>
     <tr>
-        <td>Time in garage:</td>
+        <td><strong>Time in garage:</strong></td>
         <td>@ViewData["timeInGarage"]</td>
     </tr>
     <tr>
-        <td>Cost (price per minute=2SEK):</td>@*todo: gör en bättre kostnadslösning sen*@
-        <td>@ViewData["cost"]</td>
+        <td colspan="2"><hr /></td>
+    </tr>
+    <tr>
+        <td><strong>Cost:</strong></td>@*todo: gör en bättre kostnadslösning sen*@
+        <td><em>@ViewData["cost"] SEK</em></td>
     </tr>
 </table>
 <hr />
