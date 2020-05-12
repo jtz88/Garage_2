@@ -2,13 +2,26 @@
 
 @{
     ViewData["Title"] = "Edit";
-}EVehicleType" class="form-control" />
-                <span asp-validation-for="VehicleType" class="text-danger"></span>
-            </div>
+}
+
+<h1>Edit</h1>
+
+<h4>ParkedVehicle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="RegNr" class="control-label"></label>
                 <input readonly asp-for="RegNr" class="form-control" />
                 <span asp-validation-for="RegNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleType" class="control-label"></label>
+                <input readonly asp-for="VehicleType" class="form-control" />
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NrOfWheels" class="control-label"></label>
@@ -33,7 +46,7 @@
             <div class="form-group">
                 <label asp-for="TimeOfArrival" class="control-label"></label>
                 <input readonly asp-for="TimeOfArrival" class="form-control" />
-                @*    <span asp-validation-for="TimeOfArrival" class="text-danger"></span> *@
+                @*   <span asp-validation-for="TimeOfArrival" class="text-danger"></span> *@
             </div>
             <div class="form-group">
                 <label asp-for="TimeInGarage" class="control-label"></label>
