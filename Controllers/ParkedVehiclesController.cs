@@ -201,7 +201,7 @@ namespace Garage_2.Controllers
             return View(parkedVehicle);
         }
 
-        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage)
+        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage, int cost)
         {
             //https://localhost:44347/ParkedVehicles/Receipt?regnr=aaa&vehicleType=2&nrOfWheels=3&color=red&brand=ccc&model=ddd&timeOfArrival=2000-01-01
             ViewData["regnr"] = regnr;
@@ -212,10 +212,11 @@ namespace Garage_2.Controllers
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
             ViewData["timeInGarage"] = timeInGarage;
+            ViewData["cost"] = cost;
             return View();
         }
 
-        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage)
+        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage, int cost)
         {
             ViewData["regnr"] = regnr;
             ViewData["vehicleType"] = vehicleType;
@@ -225,6 +226,7 @@ namespace Garage_2.Controllers
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
             ViewData["timeInGarage"] = timeInGarage;
+            ViewData["cost"] = cost;
             return View();
         }
 
@@ -262,6 +264,16 @@ namespace Garage_2.Controllers
             var t = parkedVehicle.TimeOfArrival;
             var tg = parkedVehicle.TimeInGarage;
             //var tg = DateTime.Now.Subtract(t);
+
+            //kostnad (går att göra bättre sen)
+            var timeInGarage = DateTime.Now.Subtract(t);
+            //String.Format($"{timeInGarage.Hours:00}:{ timeInGarage.Minutes:00}:{timeInGarage.Seconds:00}");
+            int mins = timeInGarage.Hours * 60;
+            mins += timeInGarage.Minutes;
+            const int minuteFee = 2;
+            int cost = mins * minuteFee;
+
+
             var routeValues = new RouteValueDictionary  {
                 { "regnr", r },
                 { "vehicleType", v },
@@ -270,7 +282,8 @@ namespace Garage_2.Controllers
                 { "brand",b},
                 { "model",m},
                 { "timeOfArrival",t},
-                { "timeInGarage", tg }
+                { "timeInGarage", tg },
+                { "cost", cost }
                                                         };
 
             _context.ParkedVehicle.Remove(parkedVehicle);
