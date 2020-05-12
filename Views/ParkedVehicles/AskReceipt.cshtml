@@ -1,19 +1,8 @@
 ﻿
 @{
     ViewData["Title"] = "Receipt?";
-
-    /*
-     *   @ViewData["regnr"]<br />
-            @ViewData["vehicleType"]<br />
-            @ViewData["nrOfWheels"]<br />
-            @ViewData["color"]<br />
-            @ViewData["brand"]<br />
-            @ViewData["model"]<br />
-            @ViewData["timeOfArrival"]<br />
-     * */
 }
 
 <h1>Receipt??</h1>
 <a href="/ParkedVehicles/Receipt?regnr=@ViewData["regnr"]&vehicleType=@ViewData["vehicleType"]&nrOfWheels=@ViewData["nrOfWheels"]&color=@ViewData["color"]&brand=@ViewData["brand"]&model=@ViewData["model"]&timeOfArrival=@ViewData["timeOfArrival"]&timeInGarage=@ViewData["timeInGarage"]&cost=@ViewData["cost"]">YES</a>
-<a href="/">NO</a>
-
+<a asp-action="Index">NO</a>
