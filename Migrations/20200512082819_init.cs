@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Garage_2.Migrations
 {
-    public partial class _0512_switch : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,10 +30,18 @@ namespace Garage_2.Migrations
             migrationBuilder.InsertData(
                 table: "ParkedVehicle",
                 columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "PosParkingSpace", "RegNr", "VehicleType" },
+                values: new object[] { 1, null, null, null, 4, 0, "US_LM126", 0 });
+
+            migrationBuilder.InsertData(
+                table: "ParkedVehicle",
+                columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "PosParkingSpace", "RegNr", "TimeOfArrival", "VehicleType" },
+                values: new object[] { 2, null, "White", null, 0, 0, "BVG17", new DateTime(2020, 5, 11, 8, 58, 19, 195, DateTimeKind.Local).AddTicks(5705), 1 });
+
+            migrationBuilder.InsertData(
+                table: "ParkedVehicle",
+                columns: new[] { "Id", "Brand", "Color", "Model", "NrOfWheels", "PosParkingSpace", "RegNr", "VehicleType" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, 4, 0, "US_LM126", 0 },
-                    { 2, null, "White", null, 0, 0, "BVG17", 1 },
                     { 3, null, null, null, 6, 0, "BUS123", 2 },
                     { 4, null, null, null, 4, 0, "ABC123", 3 },
                     { 5, null, "Black", "Yamaha YZF1000R 4VD", 2, 0, "ADZ967", 4 }

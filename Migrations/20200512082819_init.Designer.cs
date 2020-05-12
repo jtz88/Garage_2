@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Garage_2.Migrations
 {
     [DbContext(typeof(Garage_2Context))]
-    [Migration("20200512070516_0512_switch")]
-    partial class _0512_switch
+    [Migration("20200512082819_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,7 +83,7 @@ namespace Garage_2.Migrations
                             NrOfWheels = 0,
                             PosParkingSpace = 0,
                             RegNr = "BVG17",
-                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeOfArrival = new DateTime(2020, 5, 11, 8, 58, 19, 195, DateTimeKind.Local).AddTicks(5705),
                             VehicleType = 1
                         },
                         new

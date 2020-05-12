@@ -81,7 +81,7 @@ namespace Garage_2.Migrations
                             NrOfWheels = 0,
                             PosParkingSpace = 0,
                             RegNr = "BVG17",
-                            TimeOfArrival = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeOfArrival = new DateTime(2020, 5, 11, 8, 58, 19, 195, DateTimeKind.Local).AddTicks(5705),
                             VehicleType = 1
                         },
                         new
