@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Garage_2.Migrations
 {
     [DbContext(typeof(Garage_2Context))]
-    [Migration("20200511175216_99")]
-    partial class _99
+    [Migration("20200512070516_0512_switch")]
+    partial class _0512_switch
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

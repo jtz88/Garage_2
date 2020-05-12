@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Garage_2.Migrations
 {
-    public partial class _99 : Migration
+    public partial class _0512_switch : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

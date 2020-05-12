@@ -203,7 +203,7 @@ namespace Garage_2.Controllers
             return View(parkedVehicle);
         }
 
-        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+        public IActionResult Receipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage, int cost)
         {
             //https://localhost:44347/ParkedVehicles/Receipt?regnr=aaa&vehicleType=2&nrOfWheels=3&color=red&brand=ccc&model=ddd&timeOfArrival=2000-01-01
             ViewData["regnr"] = regnr;
@@ -213,10 +213,12 @@ namespace Garage_2.Controllers
             ViewData["brand"] = brand;
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
+            ViewData["timeInGarage"] = timeInGarage;
+            ViewData["cost"] = cost;
             return View();
         }
-        
-        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival)
+
+        public IActionResult AskReceipt(string regnr, VehicleType vehicleType, int nrOfWheels, string color, string brand, string model, DateTime timeOfArrival, string timeInGarage, int cost)
         {
             ViewData["regnr"] = regnr;
             ViewData["vehicleType"] = vehicleType;
@@ -225,6 +227,8 @@ namespace Garage_2.Controllers
             ViewData["brand"] = brand;
             ViewData["model"] = model;
             ViewData["timeOfArrival"] = timeOfArrival;
+            ViewData["timeInGarage"] = timeInGarage;
+            ViewData["cost"] = cost;
             return View();
         }
 
@@ -252,7 +256,7 @@ namespace Garage_2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
-                    
+
             var r = parkedVehicle.RegNr;
             var v = parkedVehicle.VehicleType;
             var n = parkedVehicle.NrOfWheels;
@@ -260,6 +264,18 @@ namespace Garage_2.Controllers
             var b = parkedVehicle.Brand;
             var m = parkedVehicle.Model;            //whatever
             var t = parkedVehicle.TimeOfArrival;
+            var tg = parkedVehicle.TimeInGarage;
+            //var tg = DateTime.Now.Subtract(t);
+
+            //kostnad (går att göra bättre sen)
+            var timeInGarage = DateTime.Now.Subtract(t);
+            //String.Format($"{timeInGarage.Hours:00}:{ timeInGarage.Minutes:00}:{timeInGarage.Seconds:00}");
+            int mins = timeInGarage.Hours * 60;
+            mins += timeInGarage.Minutes;
+            const int minuteFee = 2;
+            int cost = mins * minuteFee;
+
+
             var routeValues = new RouteValueDictionary  {
                 { "regnr", r },
                 { "vehicleType", v },
@@ -267,12 +283,14 @@ namespace Garage_2.Controllers
                 { "color",c},
                 { "brand",b},
                 { "model",m},
-                { "timeOfArrival",t}
+                { "timeOfArrival",t},
+                { "timeInGarage", tg },
+                { "cost", cost }
                                                         };
 
             _context.ParkedVehicle.Remove(parkedVehicle);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(AskReceipt),routeValues);
+            return RedirectToAction(nameof(AskReceipt), routeValues);
         }
 
         private bool ParkedVehicleExists(int id)

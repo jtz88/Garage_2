@@ -7,31 +7,43 @@
 <hr />
 <table>
     <tr>
-        <td>Reg number:</td><td>@ViewData["regnr"]</td>
+        <td>Reg number:</td>
+        <td>@ViewData["regnr"]</td>
     </tr>
     <tr>
-        <td>Vehicle Type:</td><td>@ViewData["vehicleType"]</td>
-
+        <td>Vehicle Type:</td>
+        <td>@ViewData["vehicleType"]</td>
     </tr>
     <tr>
-        <td>Nr of wheels:</td><td>@ViewData["nrOfWheels"]</td>
-
+        <td>Nr of wheels:</td>
+        <td>@ViewData["nrOfWheels"]</td>
     </tr>
     <tr>
-        <td>Color:</td><td>@ViewData["color"]</td>
-
+        <td>Color:</td>
+        <td>@ViewData["color"]</td>
     </tr>
     <tr>
-        <td>Brand:</td><td>@ViewData["brand"]</td>
-
+        <td>Brand:</td>
+        <td>@ViewData["brand"]</td>
     </tr>
     <tr>
-        <td>Model:</td><td>@ViewData["model"]</td>
+        <td>Model:</td>
+        <td>@ViewData["model"]</td>
     </tr>
     <tr>
-        <td>Time of arrival:</td><td>@ViewData["timeOfArrival"] (add parked time)</td>
+        <td>Time of arrival:</td>
+        <td>@ViewData["timeOfArrival"]</td>
+    </tr>
+    <tr>
+        <td>Time in garage:</td>
+        <td>@ViewData["timeInGarage"]</td>
+    </tr>
+    <tr>
+        <td>Cost (price per minute=2SEK):</td>@*todo: gör en bättre kostnadslösning sen*@
+        <td>@ViewData["cost"]</td>
     </tr>
 </table>
 <hr />
-<a href="/">back to list..</a>
-
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
