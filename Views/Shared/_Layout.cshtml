@@ -40,6 +40,15 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
+            @if (TempData["UserMessage"] != null)
+            {
+                 /* var message =(MessageVM)TempData["UserMessage"];*/
+            <div class="alert alert-success" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Confirm! </strong>@TempData["UserMessage"]
+            </div>
+            }
             @RenderBody()
         </main>
     </div>
@@ -52,6 +61,15 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $("#success-alert").hide();
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

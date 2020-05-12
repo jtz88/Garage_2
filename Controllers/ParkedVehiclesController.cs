@@ -122,6 +122,7 @@ namespace Garage_2.Controllers
                 {
                     _context.Add(parkedVehicle);
                     await _context.SaveChangesAsync();
+                    TempData["UserMessage"]= "Create vehicle successful";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException ex)
@@ -184,6 +185,7 @@ namespace Garage_2.Controllers
                 {
                     _context.Update(parkedVehicle);
                     await _context.SaveChangesAsync();
+                    TempData["UserMessage"] = "Update vehicle successful";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
