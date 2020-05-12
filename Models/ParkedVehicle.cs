@@ -32,7 +32,7 @@ namespace Garage_2.Models
         [StringLength(64)]
         public string Model { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Time of arrival")]
         public DateTime TimeOfArrival { get; set; }
 
