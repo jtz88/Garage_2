@@ -43,7 +43,7 @@ namespace Garage_2.Models
             get
             {
                 var timeInGarage = DateTime.Now.Subtract(TimeOfArrival);
-                return String.Format($"{timeInGarage.Days}d  {timeInGarage.Hours:00}h { timeInGarage.Minutes:00}m {timeInGarage.Seconds:00}s");
+                return String.Format($"{timeInGarage.Days}d  {timeInGarage.Hours:00}h { timeInGarage.Minutes:00}m");
             }
         }
     }
